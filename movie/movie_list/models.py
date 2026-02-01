@@ -4,7 +4,7 @@ class Movie(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
 
-    rating = models.PositiveSmallIntegerField()      # 0..10 validated in serializer
+    rating = models.PositiveSmallIntegerField()     
     duration_minutes = models.PositiveIntegerField()
     genre = models.CharField(max_length=100)
     actors = models.TextField()
@@ -19,7 +19,7 @@ class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="reviews")
     author = models.CharField(max_length=100)
     text = models.TextField()
-    rating = models.PositiveSmallIntegerField()      # 0..10 validated in serializer
+    rating = models.PositiveSmallIntegerField()      
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

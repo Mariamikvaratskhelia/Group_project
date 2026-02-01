@@ -27,7 +27,7 @@ def movies_list_create(request):
 
 
 
-# ⭐ BONUS: DELETE movie
+#  DELETE movie
 @api_view(["DELETE"])
 def movie_delete(request, id):
     try:
@@ -39,7 +39,7 @@ def movie_delete(request, id):
     return Response({"message": "Movie deleted successfully"}, status=status.HTTP_200_OK)
 
 
-# ✅ REVIEWS: GET + POST (separate endpoint)
+# REVIEWS: GET + POST 
 @api_view(["GET", "POST"])
 def reviews_list_create(request):
     if request.method == "GET":
@@ -57,6 +57,17 @@ def reviews_list_create(request):
         )
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(["DELETE"])
+def review_delete(request, id):
+    try:
+        review = Review.objects.get(id=id)
+    except Review.DoesNotExist:
+        return Response({"error": "Review not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    review.delete()
+    return Response({"message": "Review deleted successfully"}, status=status.HTTP_200_OK)
 
 
 @api_view(["GET"])
